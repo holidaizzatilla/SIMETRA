@@ -13,4 +13,13 @@ class instruktur_hafalan extends Model
         'kategori_hafalan_id',
         'aktif',
     ];
+    public function guru() {
+        return $this->belongsTo(guru::class);
+    }
+    public function kategori_hafalan() {
+        return $this->hasMany(kategori_hafalan::class);
+    }
+    public function setoran_hafalan() {
+        return $this->hasMany(setoran_hafalan::class);
+    }
 }

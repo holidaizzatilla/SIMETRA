@@ -19,4 +19,11 @@ class guru extends Model
         'password',
         'remember_token',
     ];
+   public function instruktur_murojaah() {
+    return $this->hasOne(instruktur_murojaah::class);
+}
+public function instruktur_hafalan() {
+    return $this->hasMany(instruktur_hafalan::class);
+}
+
 }

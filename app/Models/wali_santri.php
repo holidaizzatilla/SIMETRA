@@ -20,4 +20,7 @@ class wali_santri extends Model
         'password',
         'remember_token',
     ];
+    public function santri() {
+        return $this->belongsTo(santri::class);
+    }
 }

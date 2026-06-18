@@ -12,5 +12,10 @@ class instruktur_murojaah extends Model
         'guru_id',
         'aktif',
     ];
-    
+    public function guru() {
+    return $this->belongsTo(guru::class);
+}
+public function murojaah() {
+    return $this->hasMany(murojaah::class);
+}
 }

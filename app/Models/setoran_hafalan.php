@@ -18,4 +18,10 @@ class setoran_hafalan extends Model
         'kehadiran',
         'tanggal',
     ];
+    public function instruktur_hafalan() {
+        return $this->belongsTo(instruktur_hafalan::class);
+    }
+    public function santri() {
+        return $this->belongsTo(santri::class);
+    }
 }

@@ -18,6 +18,8 @@ class murojaah extends Model
         'kehadiran',
         'tanggal',
     ];
-
+public function instruktur_murojaah() {
+    return $this->belongsTo(instruktur_murojaah::class,);
+}
 
 }

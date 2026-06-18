@@ -12,4 +12,8 @@ class kategori_hafalan extends Model
         'range_juz',
         'lokasi',
     ];
+    public function instruktur_hafalan() {
+        return $this->belongsTo(instruktur_hafalan::class);
+    }
+    
 }
