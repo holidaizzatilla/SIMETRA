@@ -12,7 +12,10 @@ class WaliSantriController extends Controller
      */
     public function index()
     {
-        //
+      if (auth()->user()->role !== 'walisantri') {
+        abort(403, 'Anda tidak diizinkan masuk ke halaman ini.');
+    }
+    return view('walisantri.dashboard');
     }
 
     /**

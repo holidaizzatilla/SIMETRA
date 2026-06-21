@@ -12,7 +12,14 @@ class PembinaController extends Controller
      */
     public function index()
     {
-        //
+       if (auth()->user()->role !== 'pembina') {
+        abort(403, 'Anda tidak diizinkan masuk ke halaman ini.');
+    }
+    $pembinaList = collect([
+        (object) ['id' => 1, 'name' => 'Ustadz Ahmad', 'username' => 'ustadz_ahmad'],
+        (object) ['id' => 2, 'name' => 'Ustadz Budi', 'username' => 'ustadz_budi'],
+    ]);
+    return view('pembina.dashboard');
     }
 
     /**

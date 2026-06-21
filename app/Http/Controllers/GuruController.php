@@ -11,9 +11,16 @@ class GuruController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+{
+    if (auth()->user()->role !== 'guru') {
+        abort(403, 'Anda tidak diizinkan masuk ke halaman ini.');
     }
+    $guruList = collect([
+        (object) ['id' => 1, 'name' => 'Ustadz Ahmad', 'username' => 'ustadz_ahmad'],
+        (object) ['id' => 2, 'name' => 'Ustadz Budi', 'username' => 'ustadz_budi'],
+    ]);
+    return view('guru.dashboard');
+}
 
     /**
      * Show the form for creating a new resource.

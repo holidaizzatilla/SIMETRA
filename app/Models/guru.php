@@ -19,6 +19,9 @@ class guru extends Model
         'password',
         'remember_token',
     ];
+    public function user() {
+    return $this->belongsTo(User::class);
+}
    public function instruktur_murojaah() {
     return $this->hasOne(instruktur_murojaah::class);
 }
