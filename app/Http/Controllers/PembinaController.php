@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pembina;
+use App\Models\Pembina; // Pastikan huruf besar (sesuai nama Class)
 use Illuminate\Http\Request;
 
 class PembinaController extends Controller
@@ -12,14 +12,14 @@ class PembinaController extends Controller
      */
     public function index()
     {
-       if (auth()->user()->role !== 'pembina') {
-        abort(403, 'Anda tidak diizinkan masuk ke halaman ini.');
-    }
-    $pembinaList = collect([
-        (object) ['id' => 1, 'name' => 'Ustadz Ahmad', 'username' => 'ustadz_ahmad'],
-        (object) ['id' => 2, 'name' => 'Ustadz Budi', 'username' => 'ustadz_budi'],
-    ]);
-    return view('pembina.dashboard');
+        // Biasanya manajemen pembina diakses oleh 'admin', bukan 'pembina'
+        // Silakan sesuaikan role-nya jika perlu
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Anda tidak diizinkan masuk ke halaman ini.');
+        }
+
+        $pembinaList = Pembina::all(); 
+        return view('admin.pembina.index', compact('pembinaList'));
     }
 
     /**
@@ -27,7 +27,7 @@ class PembinaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pembina.create');
     }
 
     /**
@@ -35,38 +35,51 @@ class PembinaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_pembina' => 'required|string|max:255',
+            'periode'      => 'required|string|max:20',
+            'username'     => 'required|unique:pembinas,username',
+            'password'     => 'required|min:6',
+        ]);
+
+        $validated['password'] = bcrypt($request->password);
+        $validated['aktif'] = $request->has('aktif') ? true : false;
+
+        Pembina::create($validated);
+
+        return redirect()->route('admin.pembina.index')->with('success', 'Pembina berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(pembina $pembina)
+    public function edit($id)
+{
+    $pembina = Pembina::findOrFail($id);
+    return view('admin.pembina.edit', compact('pembina'));
+} 
+public function update(Request $request, $id)
     {
-        //
+        $pembina = Pembina::findOrFail($id);
+
+        $validated = $request->validate([
+            'nama_pembina' => 'required|string|max:255',
+            'periode'      => 'required|string|max:20',
+            'username'     => 'required|unique:pembinas,username,' . $id,
+        ]);
+
+        if ($request->filled('password')) {
+            $validated['password'] = bcrypt($request->password);
+        }
+        
+       
+// Di dalam method update atau store
+$validated['aktif'] = $request->has('aktif') ? 'Y' : 'N';
+$pembina->update($validated);
+
+        return redirect()->route('admin.pembina.index')->with('success', 'Data pembina berhasil diperbarui!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(pembina $pembina)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, pembina $pembina)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(pembina $pembina)
-    {
-        //
+        Pembina::findOrFail($id)->delete();
+        return redirect()->route('admin.pembina.index')->with('success', 'Data pembina berhasil dihapus!');
     }
 }

@@ -10,26 +10,50 @@ class SantriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
+   public function index(Request $request)
+{
+    $santriList = Santri::query()
+        // Filter Pencarian (Nama/NIS)
+        ->when($request->search, function ($query, $search) {
+            $query->where('nama_santri', 'like', "%{$search}%")
+                  ->orWhere('nis', 'like', "%{$search}%");
+        })
+        // Filter Kamar
+        ->when($request->kamar, function ($query, $kamar) {
+            $query->where('kamar', $kamar);
+        })
+        // Filter JK
+        ->when($request->jk, function ($query, $jk) {
+            $query->where('jk', $jk);
+        })
+        ->paginate(20)
+        ->withQueryString(); // Agar filter tetap ada saat pindah halaman
 
+    return view('admin.santri.index', compact('santriList'));
+}
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    // app/Http/Controllers/SantriController.php
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+public function create()
+{
+    return view('admin.santri.create');
+}
+
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nis' => 'required|unique:santris,nis',
+        'nama_santri' => 'required',
+        'jk' => 'required',
+        'kamar' => 'required',
+        'jumlah_hafalan_juz' => 'required|numeric',
+    ]);
+
+    \App\Models\Santri::create($validated);
+    return redirect()->route('admin.santri.index')->with('success', 'Data santri berhasil ditambahkan!');
+}
 
     /**
      * Display the specified resource.
@@ -42,18 +66,29 @@ class SantriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(santri $santri)
-    {
-        //
-    }
+    // app/Http/Controllers/SantriController.php
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, santri $santri)
-    {
-        //
-    }
+public function edit($id)
+{
+    $santri = \App\Models\Santri::findOrFail($id);
+    return view('admin.santri.edit', compact('santri'));
+}
+
+public function update(Request $request, $id)
+{
+    $santri = \App\Models\Santri::findOrFail($id);
+    
+    $validated = $request->validate([
+        'nis' => 'required|unique:santris,nis,' . $id,
+        'nama_santri' => 'required',
+        'jk' => 'required',
+        'kamar' => 'required',
+        'jumlah_hafalan_juz' => 'required|numeric',
+    ]);
+
+    $santri->update($validated);
+    return redirect()->route('admin.santri.index')->with('success', 'Data santri berhasil diupdate!');
+}
 
     /**
      * Remove the specified resource from storage.

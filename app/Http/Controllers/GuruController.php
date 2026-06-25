@@ -2,71 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\guru;
 use Illuminate\Http\Request;
+use App\Models\Guru;
 
 class GuruController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-{
-    if (auth()->user()->role !== 'guru') {
-        abort(403, 'Anda tidak diizinkan masuk ke halaman ini.');
+    {
+        $guruList = Guru::all();
+        return view('admin.guru.index', compact('guruList'));
     }
-    $guruList = collect([
-        (object) ['id' => 1, 'name' => 'Ustadz Ahmad', 'username' => 'ustadz_ahmad'],
-        (object) ['id' => 2, 'name' => 'Ustadz Budi', 'username' => 'ustadz_budi'],
-    ]);
-    return view('guru.dashboard');
-}
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.guru.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_guru' => 'required|string|max:255',
+            'jk'        => 'required|in:L,P',
+            'no_telp'   => 'required|string|max:20',
+            'username'  => 'required|string|unique:gurus,username',
+            'password'  => 'required|min:6',
+        ]);
+
+        Guru::create([
+            'nama_guru' => $request->nama_guru,
+            'jk'        => $request->jk,
+            'no_telp'   => $request->no_telp,
+            'username'  => $request->username,
+            'password'  => bcrypt($request->password), 
+        ]);
+
+        return redirect()->route('admin.guru.index')->with('success', 'Data guru berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(guru $guru)
+    public function edit($id)
     {
-        //
+        $guru = Guru::findOrFail($id);
+        return view('admin.guru.edit', compact('guru'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(guru $guru)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_guru' => 'required|string|max:255',
+            'jk'        => 'required|in:L,P',
+            'no_telp'   => 'required|string|max:20',
+            'username'  => 'required|string|unique:gurus,username,'.$id,
+        ]);
+
+        $guru = Guru::findOrFail($id);
+        $guru->update([
+            'nama_guru' => $request->nama_guru,
+            'jk'        => $request->jk,
+            'no_telp'   => $request->no_telp,
+            'username'  => $request->username,
+        ]);
+
+        if ($request->filled('password')) {
+            $guru->update(['password' => bcrypt($request->password)]);
+        }
+
+        return redirect()->route('admin.guru.index')->with('success', 'Data guru berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, guru $guru)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(guru $guru)
-    {
-        //
+        Guru::findOrFail($id)->delete();
+        return redirect()->route('admin.guru.index')->with('success', 'Data guru berhasil dihapus!');
     }
 }
