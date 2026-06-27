@@ -89,19 +89,19 @@
                         <i class="fa-solid fa-bolt text-amber-500"></i> Menu Aksi Cepat Admin
                     </h3>
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('admin.pembina') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
+                        <a href="{{ route('admin.pembina.index') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
                             <i class="fa-solid fa-sliders text-slate-400 group-hover:text-white transition-colors"></i> 
                             Kelola Data Pembina
                         </a>
-                        <a href="{{ route('admin.guru') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
+                        <a href="{{ route('admin.guru.index') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
                             <i class="fa-solid fa-users-gear text-slate-400 group-hover:text-white transition-colors"></i> 
                             Kelola Data Guru
                         </a>
-                        <a href="{{ route('admin.santri') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
+                        <a href="{{ route('admin.santri.index') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
                             <i class="fa-solid fa-sliders text-slate-400 group-hover:text-white transition-colors"></i> 
                             Kelola Data Santri
                         </a>
-                        <a href="{{ route('admin.walisantri') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
+                        <a href="{{ route('admin.walisantri.index') }}" class="px-6 py-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl font-bold text-sm text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 hover:shadow-lg hover:shadow-indigo-600/10 transition-all duration-200 flex items-center gap-2.5 group">
     <i class="fa-solid fa-user-group text-slate-400 group-hover:text-white transition-colors"></i> 
     Kelola Data Wali
 </a>

@@ -21,17 +21,18 @@
             </div>
 
             <p class="px-3 text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Navigasi</p>
-            <ul class="space-y-1.5 font-medium">
-                
-                @if(Request::is('admin*'))
-                    <li><a href="{{ route('admin.dashboard') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.dashboard') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-chart-simple w-6"></i><span class="ms-3 text-sm">Dashboard</span></a></li>
-                    <li><a href="{{ route('admin.pembina') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.pembina*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-user-tie w-6"></i><span class="ms-3 text-sm">Data Pembina</span></a></li>
-                    <li><a href="{{ route('admin.guru') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.guru*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-chalkboard-user w-6"></i><span class="ms-3 text-sm">Data Guru</span></a></li>
-                    <li><a href="{{ route('admin.santri') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.santri*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-users w-6"></i><span class="ms-3 text-sm">Data Santri</span></a></li>
-                    <li><a href="{{ route('admin.walisantri') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.walisantri*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-user-group w-6"></i><span class="ms-3 text-sm">Data Wali Santri</span></a></li>
-                    <li><a href="{{ route('admin.rekapitulasi') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.rekap*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-file-invoice w-6"></i><span class="ms-3 text-sm">Rekapitulasi</span></a></li>
-                    <li class="pt-4 mt-2 border-t border-white/10"><a href="{{ route('admin.profil') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.profil') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-user-gear w-6"></i><span class="ms-3 text-sm">Pengaturan Profil</span></a></li>
-                @endif
+           <ul class="space-y-1.5 font-medium">
+    @if(Request::is('admin*'))
+        <li><a href="{{ route('admin.dashboard') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.dashboard') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-chart-simple w-6"></i><span class="ms-3 text-sm">Dashboard</span></a></li>
+        
+        <li><a href="{{ route('admin.pembina.index') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.pembina*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-user-tie w-6"></i><span class="ms-3 text-sm">Data Pembina</span></a></li>
+        <li><a href="{{ route('admin.guru.index') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.guru*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-chalkboard-user w-6"></i><span class="ms-3 text-sm">Data Guru</span></a></li>
+        <li><a href="{{ route('admin.santri.index') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.santri*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-users w-6"></i><span class="ms-3 text-sm">Data Santri</span></a></li>
+        <li><a href="{{ route('admin.walisantri.index') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.walisantri*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-user-group w-6"></i><span class="ms-3 text-sm">Data Wali Santri</span></a></li>
+        
+        <li><a href="{{ route('admin.rekapitulasi') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.rekap*') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-file-invoice w-6"></i><span class="ms-3 text-sm">Rekapitulasi</span></a></li>
+        <li class="pt-4 mt-2 border-t border-white/10"><a href="{{ route('admin.profil') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('admin.profil') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-user-gear w-6"></i><span class="ms-3 text-sm">Pengaturan Profil</span></a></li>
+    @endif
 
                 @if(Request::is('guru*'))
                     <li><a href="{{ route('guru.dashboard') }}" class="flex items-center p-3 rounded-xl transition {{ request()->routeIs('guru.dashboard') ? 'bg-amber-400 text-indigo-950 font-bold shadow-md' : 'text-white/50 hover:bg-white/10' }}"><i class="fa-solid fa-chart-simple w-6"></i><span class="ms-3 text-sm">Dashboard</span></a></li>
@@ -52,12 +53,13 @@
             </ul>
         </div>
 
-        <div class="pt-4 border-t border-white/10 text-white">
-            <a href="{{ route('welcome') }}" class="flex items-center p-3 text-rose-300 rounded-xl hover:bg-rose-500/10 transition font-bold text-sm">
-                <i class="fa-solid fa-right-from-bracket w-6"></i>
-                <span class="ms-3">Keluar Sistem</span>
-            </a>
-        </div>
+        <form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit" class="flex items-center p-3 text-rose-300 rounded-xl hover:bg-rose-500/10 transition font-bold text-sm w-full">
+        <i class="fa-solid fa-right-from-bracket w-6"></i>
+        <span class="ms-3">Keluar Sistem</span>
+    </button>
+</form>
     </div>
 </aside>
 
